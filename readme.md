@@ -42,9 +42,14 @@ Then execute following code to get summary from text in sample.txt file
 
 This inferencing will give summarized text as:
 
-Sample text:
+### Sample text:
 
-Summarized text:
+![image](https://user-images.githubusercontent.com/43941329/197317315-cadbe63b-98da-45ae-a02f-38486085a701.png)
+
+### Summarized text:
+
+![image](https://user-images.githubusercontent.com/43941329/197317319-61e3fe5e-b9de-48d0-a498-ebced103f987.png)
+
 
 To use this model on custom text file, execute following code.
 
