@@ -2,12 +2,16 @@
 import numpy as np
 import tokenizer
 import ranker
+import sys
 
 def get_summary_from_text_file(file_path = "sample.txt"):
     # 
     # Reading text files (sample text file, word endings file and stopwords file)
     #
     text = open(file_path,'r',encoding="utf-8").read()
+    return get_summary(text)
+
+def get_summary(text):
     stop_words = open("stopwords.txt",'r',encoding="utf-8").read()
     word_endings = open("word_endings.txt",'r',encoding='utf-8').read() 
     valid_characters = tokenizer.get_valid_chars()
@@ -66,14 +70,20 @@ def get_summary_from_text_file(file_path = "sample.txt"):
     print(summarized_text)
     
     open('output.txt', 'w',encoding="utf-8").write(summarized_text)
-    
-    
-    
-    
+    return summarized_text
     
 
 if __name__ == "__main__":
-    get_summary_from_text_file("sample.txt")
-    
+    if len(sys.argv) == 1: 
+        print("Summarizing text from sample.txt ")
+        summarized_text = get_summary_from_text_file("sample.txt")
+    else:
+        arguments = sys.argv[1]
+        if arguments.lower() == 'text':
+            text = input("Enter the Text to be summarized :\n")
+            summarized_text = get_summary(text)
+        else:
+            summarized_text = get_summary_from_text_file(arguments)
+        
     
     
