@@ -2,7 +2,6 @@
 import numpy as np
 import tokenizer
 import ranker
-<<<<<<< HEAD
 import sys, getopt
 
 inputfile = "sample.txt"
@@ -56,42 +55,21 @@ def get_summary_from_text(text,force_use_purnabiram_model):
         is_complete_sentence = False
     # print(is_complete_sentence)   
 
-=======
-import sys
-
-def get_summary_from_text_file(file_path = "sample.txt"):
-    # 
-    # Reading text files (sample text file, word endings file and stopwords file)
-    #
-    text = open(file_path,'r',encoding="utf-8").read()
-    return get_summary(text)
-
-def get_summary(text):
-    stop_words = open("stopwords.txt",'r',encoding="utf-8").read()
-    word_endings = open("word_endings.txt",'r',encoding='utf-8').read() 
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     valid_characters = tokenizer.get_valid_chars()
     # print(stop_words.split("\n"))
     # print(text)
     #
     # Remove useless characters from the sentence 
-<<<<<<< HEAD
     # 
       
     if not is_complete_sentence:
         text = tokenizer.add_purnabiram(text,kriyapads,samyojaks)
     print(f"Sentence after adding purnabirams: \n{text}")  
     
-=======
-    #     
-    text = tokenizer.remove_useless_characters(text,valid_characters)  
-    print(text)  
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     #
     # Split the sentence into array of words and patagraph in its array. (as Array of Array of the words)
     #
     sentences = tokenizer.get_sentences_as_arr(text)
-<<<<<<< HEAD
     # print(sentences)
 
     text = tokenizer.remove_useless_characters(text,valid_characters)
@@ -105,17 +83,11 @@ def get_summary(text):
         return sentences
     
     # print(sentences)
-=======
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     words_arr = tokenizer.get_words_as_arr(sentences)    
     #
     # Remove the stop words from the array
     #
-<<<<<<< HEAD
     words_arr = tokenizer.remove_stop_words_and_filter_word_arr(words_arr,word_endings, stop_words)
-=======
-    words_arr = tokenizer.remove_stop_words_and_filter_word_arr(words_arr,word_endings, stop_words,)
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     # print(words_arr)
     
     #
@@ -138,10 +110,7 @@ def get_summary(text):
     # Based in the word importance ranking, calculate teh sentence importance ranking.
     # 
     sentence_influence = ranker.calculate_sentence_influence(tokens,word_influence_vector)
-<<<<<<< HEAD
     # print(sentence_influence)
-=======
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     #
     # sort sentences based on its influence 
     # 
@@ -149,14 +118,11 @@ def get_summary(text):
     # 
     # Get first n sentences from the given text as summarized text.
     # 
-<<<<<<< HEAD
     
     # for values in zip(sentences,sentence_influence):
     #     print(values)
     
     
-=======
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
     summary_sentences = ranker.get_n_influencial_sentence(sentences,sentence_influence,n=np.ceil(len(sentences)*0.33))
 
     #
@@ -164,7 +130,6 @@ def get_summary(text):
     #
     summarized_text = ranker.get_summarized_text(summary_sentences)
     
-<<<<<<< HEAD
     print(f"generated summary: \n{summarized_text}")
     
     with open(outputfile, 'w',encoding="utf-8") as f:
@@ -188,25 +153,3 @@ if __name__ == "__main__":
     else:
         get_summary_from_text_file(inputfile,force_use_purnabiram_model)
     
-=======
-    print(summarized_text)
-    
-    open('output.txt', 'w',encoding="utf-8").write(summarized_text)
-    return summarized_text
-    
-
-if __name__ == "__main__":
-    if len(sys.argv) == 1: 
-        print("Summarizing text from sample.txt ")
-        summarized_text = get_summary_from_text_file("sample.txt")
-    else:
-        arguments = sys.argv[1]
-        if arguments.lower() == 'text':
-            text = input("Enter the Text to be summarized :\n")
-            summarized_text = get_summary(text)
-        else:
-            summarized_text = get_summary_from_text_file(arguments)
-        
-    
-    
->>>>>>> a9f9dd160de09c9ec75daa118553ea6e6aaf5f58
